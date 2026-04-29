@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle2, User, Mail, Phone, MessageSquare, Info } from 'lucide-react';
+import { Send, CheckCircle2, User, Mail, Phone, MessageSquare, Info, ChevronDown } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -22,31 +23,38 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // ⚠️ Replace with your deployed Google Apps Script Web App URL
+    // Deploy the script as a web app and set access to Anyone, even anonymous.
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwagUgmzSp53NBwMa9juXsRGhpbwjhMB_ouqsTi6YH30MYHX2y7QmkPAWgBNRyySDWk/exec'; // <-- REPLACE THIS!
+
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain',
         },
+        mode: 'no-cors',
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      setIsSuccess(true);
+      toast.success('Thanks! We’ll notify you when we launch.');
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+        setFormData({
+          name: '', 
+          email: '', 
+          phone: '', 
+          interest: 'Kids Special Training', 
+          message: ''
+        });
+      }, 5000);
 
-      if (response.ok) {
-        setIsSuccess(true);
-        setTimeout(() => {
-          setIsSuccess(false);
-          setFormData({
-            name: '', email: '', phone: '', interest: 'Kids Special Training', message: ''
-          });
-        }, 5000);
-      } else {
-        alert(data.message || 'Something went wrong. Please try again.');
-      }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Failed to submit form. Please check your connection and try again.');
+      toast.error('Failed to submit form. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -106,7 +114,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Email Us</p>
-                    <p className="font-semibold text-slate-700 dark:text-slate-200">hello@spokeup.com</p>
+                    <p className="font-semibold text-slate-700 dark:text-slate-200">info.spokeup@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -115,7 +123,7 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Call Us</p>
-                    <p className="font-semibold text-slate-700 dark:text-slate-200">+1 (555) 000-0000</p>
+                    <p className="font-semibold text-slate-700 dark:text-slate-200">+91 8157867616</p>
                   </div>
                 </div>
               </div>
@@ -204,7 +212,7 @@ const ContactForm = () => {
                             name="interest"
                             value={formData.interest}
                             onChange={handleChange}
-                            className="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 focus:ring-2 focus:ring-primary-light/50 focus:border-primary-light transition-all outline-none appearance-none"
+                            className="w-full pl-12 pr-10 py-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 focus:ring-2 focus:ring-primary-light/50 focus:border-primary-light transition-all outline-none appearance-none cursor-pointer"
                           >
                             <option>Kids Special Training</option>
                             <option>School Students</option>
@@ -214,6 +222,7 @@ const ContactForm = () => {
                             <option>Becoming a Mentor</option>
                             <option>Other</option>
                           </select>
+                          <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-light pointer-events-none transition-colors" />
                         </div>
                       </div>
                     </div>
@@ -271,9 +280,9 @@ const ContactForm = () => {
                     >
                       <CheckCircle2 size={48} />
                     </motion.div>
-                    <h4 className="text-4xl font-black mb-4 text-slate-900 dark:text-white">Message Sent!</h4>
+                    <h4 className="text-4xl font-black mb-4 text-slate-900 dark:text-white">Thanks!</h4>
                     <p className="text-xl text-slate-600 dark:text-slate-400 max-w-sm mx-auto">
-                      We've received your information. A Spoke Up representative will contact you shortly!
+                      We’ll notify you when we launch.
                     </p>
                   </motion.div>
                 )}

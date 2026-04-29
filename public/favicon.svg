@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Teal speech bubble (back) -->
+  <rect x="30" y="18" width="52" height="38" rx="10" ry="10" fill="#00BCD4"/>
+  <polygon points="60,56 72,56 66,68" fill="#00BCD4"/>
+
+  <!-- Purple speech bubble (front) -->
+  <rect x="18" y="28" width="52" height="38" rx="10" ry="10" fill="#7C3AED"/>
+  <polygon points="28,66 40,66 28,78" fill="#7C3AED"/>
+</svg>

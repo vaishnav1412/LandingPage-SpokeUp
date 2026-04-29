@@ -62,52 +62,7 @@ const Hero = ({ onOpenContact }) => {
               transition={{ duration: 1, ease: "easeOut" }}
               className="relative mb-8 group flex flex-col items-center lg:items-start"
             >
-              {/* Outer Pulsing Glow Background */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-light/40 to-secondary-light/40 rounded-full blur-md opacity-20 group-hover:opacity-40 animate-pulse transition duration-1000"></div>
-              
-              <div className="relative inline-flex items-center px-8 py-2.5 rounded-full border border-primary-light/40 bg-white/10 dark:bg-slate-900/60 backdrop-blur-xl text-primary-light dark:text-primary-dark font-black text-[10px] uppercase tracking-[0.35em] shadow-[0_0_20px_rgba(15,164,175,0.15)] overflow-hidden">
-                
-                {/* Moving Internal Shimmer */}
-                <motion.div 
-                  animate={{ 
-                    x: ['-150%', '150%'],
-                  }}
-                  transition={{ 
-                    duration: 2.5, 
-                    repeat: Infinity, 
-                    ease: "linear",
-                    repeatDelay: 0.5
-                  }}
-                  className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-white/30 dark:via-primary-light/20 to-transparent skew-x-[30deg]"
-                />
 
-                <motion.span
-                  animate={{ 
-                    opacity: [0.9, 1, 0.9],
-                  }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity, 
-                    ease: "easeInOut" 
-                  }}
-                  className="relative z-10"
-                >
-                  Coming Soon
-                </motion.span>
-
-                {/* Animated Bottom Progress/Highlight Line */}
-                <motion.div
-                   animate={{ 
-                     x: ['-100%', '100%'],
-                   }}
-                   transition={{ 
-                     duration: 3, 
-                     repeat: Infinity, 
-                     ease: "easeInOut",
-                   }}
-                   className="absolute bottom-0 left-0 h-[1.5px] w-full bg-gradient-to-r from-transparent via-primary-light to-transparent opacity-80"
-                />
-              </div>
             </motion.div>
 
             {/* Malayalam Caption */}

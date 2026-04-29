@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Info } from 'lucide-react';
+import { X, Send, CheckCircle2, User, Mail, Phone, MessageSquare, Info, ChevronDown } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -22,32 +23,38 @@ const ContactModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Replace this with your deployed Google Apps Script Web App URL
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwagUgmzSp53NBwMa9juXsRGhpbwjhMB_ouqsTi6YH30MYHX2y7QmkPAWgBNRyySDWk/exec';
+
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain',
         },
+        mode: 'no-cors',
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      setIsSuccess(true);
+      toast.success('Thanks! We’ll notify you when we launch.');
+      
+      // Reset form after 3 seconds and close modal
+      setTimeout(() => {
+        setIsSuccess(false);
+        setFormData({
+          name: '', 
+          email: '', 
+          phone: '', 
+          interest: 'Kids Special Training', 
+          message: ''
+        });
+        onClose();
+      }, 3000);
 
-      if (response.ok) {
-        setIsSuccess(true);
-        setTimeout(() => {
-          setIsSuccess(false);
-          setFormData({
-            name: '', email: '', phone: '', interest: 'Kids Special Training', message: ''
-          });
-          onClose(); // Auto close on success after delay
-        }, 3000);
-      } else {
-        alert(data.message || 'Something went wrong. Please try again.');
-      }
     } catch (error) {
       console.error('Submission error:', error);
-      alert('Failed to submit form. Please check your connection and try again.');
+      toast.error('Failed to submit form. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -157,7 +164,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                             name="interest"
                             value={formData.interest}
                             onChange={handleChange}
-                            className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-2 focus:ring-primary-light/50 focus:border-primary-light transition-all outline-none appearance-none text-sm"
+                            className="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-2 focus:ring-primary-light/50 focus:border-primary-light transition-all outline-none appearance-none text-sm cursor-pointer"
                           >
                             <option>Kids Special Training</option>
                             <option>School Students</option>
@@ -167,6 +174,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                             <option>Becoming a Mentor</option>
                             <option>Other</option>
                           </select>
+                          <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-light pointer-events-none transition-colors" />
                         </div>
                       </div>
                     </div>
@@ -224,9 +232,9 @@ const ContactModal = ({ isOpen, onClose }) => {
                     >
                       <CheckCircle2 size={40} />
                     </motion.div>
-                    <h4 className="text-3xl font-black mb-2 text-slate-900 dark:text-white">Message Sent!</h4>
+                    <h4 className="text-3xl font-black mb-2 text-slate-900 dark:text-white">Thanks!</h4>
                     <p className="text-slate-600 dark:text-slate-400 max-w-xs mx-auto">
-                      We'll be in touch shortly!
+                      We’ll notify you when we launch.
                     </p>
                   </motion.div>
                 )}
