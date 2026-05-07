@@ -208,11 +208,11 @@ const Footer = () => {
           <div className="flex gap-8">
             <div className="flex items-center gap-2 text-slate-500 hover:text-primary-light transition-colors group cursor-pointer">
               <Mail size={16} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm">hello@spokeup.com</span>
+              <span className="text-sm">info.spokeup@gmail.com</span>
             </div>
             <div className="flex items-center gap-2 text-slate-500 hover:text-primary-light transition-colors group cursor-pointer">
               <Phone size={16} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm">+1 (555) 000-0000</span>
+              <span className="text-sm">+91 8157867616</span>
             </div>
           </div>
         </motion.div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Users, Smile } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import appScreenshot from '../assets/Gemini_Generated_Image_mk23xdmk23xdmk23.png';
 import ParticleBackground from './ParticleBackground';
 
 const Hero = ({ onOpenContact }) => {
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState({
     days: 14,
     hours: 8,
@@ -62,7 +64,22 @@ const Hero = ({ onOpenContact }) => {
               transition={{ duration: 1, ease: "easeOut" }}
               className="relative mb-8 group flex flex-col items-center lg:items-start"
             >
-
+              {/* 95% Launching Offer Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-yellow-400 border border-yellow-500 shadow-[0_0_30px_rgba(250,204,21,0.3)] group relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-white/20 animate-shimmer -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                <div className="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.2em]">
+                  SPECIAL OFFER
+                </div>
+                <span className="text-sm font-black text-slate-900 tracking-tight">
+                  Launching Discount: <span className="text-xl">95% OFF</span> For the first 2 months
+                </span>
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-900 animate-pulse ml-1"></div>
+              </motion.div>
             </motion.div>
 
             {/* Malayalam Caption */}
@@ -73,7 +90,7 @@ const Hero = ({ onOpenContact }) => {
               className="mb-4 text-center lg:text-left"
             >
               <span className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-secondary-dark">
-                കഷ്ടപെട്ടല്ല, ഇനി ഇഷ്ടപ്പെട്ടു ഇംഗ്ലീഷ് പഠിക്കാം!
+                ഇനി ഇംഗ്ലീഷിൽ പറയാം..
               </span>
             </motion.div>
 
@@ -96,34 +113,106 @@ const Hero = ({ onOpenContact }) => {
               Personalized 1-on-1 coaching for kids, students, professionals, and beginners. Master spoken English and build unbreakable confidence.
             </motion.p>
 
-            {/* Premium Buttons */}
-            <motion.div 
+            {/* Premium CTA Section */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start"
+              className="mt-10 flex flex-col gap-6 items-center lg:items-start"
             >
-              <motion.button 
-                onClick={onOpenContact}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-primary-light to-secondary-light hover:from-secondary-light hover:to-primary-light text-white font-bold text-lg shadow-[0_0_20px_rgba(15,164,175,0.4)] hover:shadow-[0_0_40px_rgba(15,164,175,0.7)] transition-all overflow-hidden"
-              >
-                <div className="absolute inset-0 h-full w-full -translate-x-full transform bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full"></div>
-                <span className="relative z-10">Notify Me</span>
-                <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-              </motion.button>
-              
-              <motion.button 
-                onClick={onOpenContact}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-300 dark:border-slate-700 hover:border-primary-light dark:hover:border-primary-dark font-bold text-slate-800 dark:text-white text-lg shadow-lg hover:shadow-primary-light/20 transition-all"
-              >
-                <Mail className="w-5 h-5 text-secondary-light dark:text-secondary-dark transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-primary-light" />
-                <span>Contact Us</span>
-              </motion.button>
+           
+
+              {/* Main CTA Block */}
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                {/* Book Free Demo - Sleek Premium */}
+                <motion.button
+                  onClick={() => onOpenContact && onOpenContact()}
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group relative flex items-center justify-center gap-3 px-12 py-5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-lg shadow-2xl hover:shadow-primary-light/30 transition-all overflow-hidden border border-white/10 dark:border-slate-200"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-light to-secondary-light opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full"></div>
+                  <div className="absolute inset-0 h-full w-full -translate-x-full transform bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full"></div>
+                  <span className="relative z-10 tracking-tight">Book Free Demo</span>
+                  <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+                </motion.button>
+
+                {/* Ghost / Secondary info */}
+                <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                  <span>Free · No credit card required</span>
+                </div>
+              </div>
+
+              {/* Audience Track Buttons */}
+              <div className="flex flex-col items-center lg:items-start gap-3 pt-2">
+                <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em]">👇 Choose Your Track</span>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4 lg:justify-start">
+                  {/* Adult Track - stays on same page */}
+                  <div className="relative">
+                    {/* Outer pulsing ring */}
+                    <motion.div
+                      animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute inset-0 rounded-full bg-primary-light/40 blur-sm"
+                    />
+                    <motion.button
+                      onClick={() => {
+                        document.getElementById('team-quote')?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      whileHover={{ scale: 1.12, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{ y: [0, -4, 0], boxShadow: ['0 0 15px rgba(15,164,175,0.3)', '0 0 35px rgba(15,164,175,0.7)', '0 0 15px rgba(15,164,175,0.3)'] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                      className="relative w-40 flex items-center justify-center gap-2.5 px-7 py-3 rounded-full bg-slate-950 dark:bg-slate-900 text-white font-black text-sm tracking-widest uppercase overflow-hidden border-2 border-primary-light transition-all z-10"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-primary-light to-secondary-light opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      {/* Inner shimmer */}
+                      <motion.div
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                        className="absolute inset-0 w-1/3 h-full bg-white/10 skew-x-12"
+                      />
+                      <Users className="w-4 h-4 relative z-10 text-primary-light" />
+                      <span className="relative z-10">For Adults</span>
+                      <span className="relative z-10 bg-primary-light/20 text-primary-light text-[9px] px-1.5 py-0.5 rounded-md font-black tracking-normal">YOU</span>
+                    </motion.button>
+                  </div>
+
+                  <span className="text-slate-400 dark:text-slate-600 font-bold text-sm lowercase italic">or</span>
+
+                  {/* Kids Track */}
+                  <div className="relative">
+                    {/* Outer pulsing ring */}
+                    <motion.div
+                      animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                      className="absolute inset-0 rounded-full bg-emerald-400/40 blur-sm"
+                    />
+                    <motion.button
+                      onClick={() => navigate('/children')}
+                      whileHover={{ scale: 1.12, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{ y: [0, -4, 0], boxShadow: ['0 0 15px rgba(16,185,129,0.3)', '0 0 35px rgba(16,185,129,0.7)', '0 0 15px rgba(16,185,129,0.3)'] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                      className="relative w-40 flex items-center justify-center gap-2.5 px-7 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-black text-sm tracking-widest uppercase overflow-hidden border-2 border-white/30 transition-all z-10"
+                    >
+                      {/* Inner shimmer */}
+                      <motion.div
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", repeatDelay: 1.2 }}
+                        className="absolute inset-0 w-1/3 h-full bg-white/20 skew-x-12"
+                      />
+                      <Smile className="w-4 h-4 relative z-10" />
+                      <span className="relative z-10">For Kids</span>
+                      <span className="relative z-10 bg-white/20 text-white text-[9px] px-1.5 py-0.5 rounded-md font-black tracking-normal">NEW</span>
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
             </motion.div>
+
           </div>
 
           {/* Right Content Area - App Screenshot with Dynamic Shadow */}
